@@ -2,6 +2,7 @@ package kg.mega.naTV.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -13,12 +14,13 @@ import java.util.List;
 @Setter
 @Getter
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Channels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameOfChannel;
-    private List<Channels> channelsList;
+
 
 
 

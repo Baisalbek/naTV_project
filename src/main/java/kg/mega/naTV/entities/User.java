@@ -2,17 +2,21 @@ package kg.mega.naTV.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Table;
 
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
+@RequiredArgsConstructor
+@Table(name = "tb_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
