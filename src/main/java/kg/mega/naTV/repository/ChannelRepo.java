@@ -9,4 +9,5 @@ import java.nio.channels.Channel;
 
 @Repository
 public interface ChannelRepo extends JpaRepository<Channels, Long> {
+    Channels findByNameOfChannel(String nameOfChannel);
 }

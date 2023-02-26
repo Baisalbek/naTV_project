@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import sun.util.calendar.LocalGregorianCalendar;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,12 +12,12 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Discount {
+public class Discounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long discount;
-    private Long discountDays;
+    private Long fromDayCount;
     private Date startDate;
     private Date endDate;
     @ManyToOne
