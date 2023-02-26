@@ -16,8 +16,8 @@ public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double priceOfLine;
-    private Double priceOfBanner;
+    private Double pricePerLetter;
+    private Double pricePerBanner;
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channels channels;
