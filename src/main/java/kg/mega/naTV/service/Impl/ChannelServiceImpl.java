@@ -1,20 +1,34 @@
 package kg.mega.naTV.service.Impl;
 
 import kg.mega.naTV.entities.Channels;
+import kg.mega.naTV.entities.dto.ChannelsDto;
+import kg.mega.naTV.mappers.ChannelMapper;
 import kg.mega.naTV.repository.ChannelRepo;
 import kg.mega.naTV.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChannelServiceImpl implements ChannelService {
-    @Autowired
-    private ChannelRepo channelRepo;
+    private final ChannelRepo channelRepo;
+    private final ChannelMapper channelMapper;
 
-//    public Channels registration(Channels channels) throws Exception {
-//        if (channelRepo.findByNameOfChannel(channels.getNameOfChannel()) != null) {
-//            throw new Exception ("Канал с таким названием уже существует!");
-//        }
-//        return channelRepo.save(channels);
-//    }
+    public ChannelServiceImpl(ChannelRepo channelRepo, ChannelMapper channelMapper) {
+        this.channelRepo = channelRepo;
+        this.channelMapper = channelMapper;
+    }
+
+    public Channels registration(Channels channels) throws Exception {
+        if (channelRepo.findByChannelName(channels.getChannelName()) != null) {
+            throw new Exception ("Канал с таким названием уже существует!");
+        }
+        return channelRepo.save(channels);
+    }
+
+    public List<ChannelsDto> getChannelList(){
+        List<Channels> channelsList =channelRepo.findAll();
+       return channelMapper.ListToDto(channelsList);
+    }
 }

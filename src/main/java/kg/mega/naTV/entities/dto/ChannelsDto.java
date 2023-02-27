@@ -9,7 +9,7 @@ public class ChannelsDto {
     private Long id;
     private String channelName;
     private String logo;
-    private Price price;
-    private Discounts discounts;
-
+    private Integer pricePerLetter;
+    private DiscountDto discountDto;
+    
 }

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+
 @Entity
 @Setter
 @Getter
@@ -17,9 +17,9 @@ public class Discounts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long discount;
-    private Long fromDayCount;
-    private Date startDate;
-    private Date endDate;
+    private Long discountDays;
+    private Long formDayCount;
+
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channels channel;

@@ -1,5 +1,6 @@
 package kg.mega.naTV.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,4 +22,5 @@ public class Channels {
     private Long id;
     private String channelName;
     private String logo;
+
 }

@@ -12,7 +12,6 @@ public class DiscountDto {
     private Long id;
     private Long discount;
     private Long discountDays;
-    private Date startDate;
-    private Date endDate;
+    private Long formDayCount;
     private Channels channel;
 }
