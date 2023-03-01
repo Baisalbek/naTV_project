@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class PriceDto {
     private Long id;
-    private Double priceOfLine;
-    private Double priceOfBanner;
+    private Double pricePerLetter;
+    private Double pricePerBanner;
     private Channels channels;
 }

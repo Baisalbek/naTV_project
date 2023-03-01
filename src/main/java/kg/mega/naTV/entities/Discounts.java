@@ -18,7 +18,7 @@ public class Discounts {
     private Long id;
     private Long discount;
     private Long discountDays;
-    private Long formDayCount;
+    private Long fromDayCount;
 
     @ManyToOne
     @JoinColumn(name = "channel_id")
