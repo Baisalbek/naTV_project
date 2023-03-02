@@ -27,9 +27,6 @@ public class Order {
     @ManyToOne
     private BannerAd bannerAd;
 
-    @ManyToOne
-    private Users user;
-
     private Double orderSumm;
     private String paymentStatus;
 

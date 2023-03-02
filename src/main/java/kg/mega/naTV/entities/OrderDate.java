@@ -1,5 +1,6 @@
 package kg.mega.naTV.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class OrderDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonProperty("dd.mm.yyyy")
     private Date days;
 
     @ManyToOne

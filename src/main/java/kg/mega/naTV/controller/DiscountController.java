@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class DiscountController {
     private final DiscountServiceImpl discountServiceImpl;
 
-
     public DiscountController(DiscountServiceImpl discountServiceImpl) {
         this.discountServiceImpl = discountServiceImpl;
     }
@@ -30,5 +29,4 @@ public class DiscountController {
     public Discounts getDiscount(@RequestParam Long id){
         return discountServiceImpl.getDiscount(id);
     }
-
 }

@@ -20,6 +20,6 @@ public class TextAd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
-    private Integer countOfSymbols;
+    private Long countOfSymbols;
 
 }

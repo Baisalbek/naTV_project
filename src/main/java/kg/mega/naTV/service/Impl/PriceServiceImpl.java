@@ -13,22 +13,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PriceServiceImpl implements PriceService {
-
     private final PriceMapper priceMapper;
-
     private final PriceRepo priceRepo;
-
     private final ChannelRepo channelRepo;
     private final ChannelMapper channelMapper;
-
-
 
     public PriceServiceImpl(PriceMapper priceMapper, PriceRepo priceRepo, ChannelRepo channelRepo, ChannelMapper channelMapper) {
         this.priceMapper = priceMapper;
         this.priceRepo = priceRepo;
         this.channelRepo = channelRepo;
         this.channelMapper = channelMapper;
-
     }
 
     public ResponseEntity<?> setPrice(PriceDto priceDto) {
@@ -41,6 +35,4 @@ public class PriceServiceImpl implements PriceService {
     public Price getPrice(Long id) {
         return priceRepo.findById(id).get();
     }
-
-
 }
