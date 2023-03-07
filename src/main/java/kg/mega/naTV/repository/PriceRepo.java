@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface PriceRepo extends JpaRepository<Price, Long> {
-
+    Price findByChannelsId(Long id);
 }

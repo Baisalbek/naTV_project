@@ -1,16 +1,16 @@
-package kg.mega.naTV.entities.dto;
+package kg.mega.naTV.entities.dto.response;
 
-import kg.mega.naTV.controller.PriceController;
-import kg.mega.naTV.entities.Price;
+import kg.mega.naTV.entities.dto.DiscountDto;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class ChannelsDto {
+public class ChannelGetListDto {
     private Long id;
     private String channelName;
     private String logo;
     private Double pricePerLetter;
     private List<DiscountDto> discounts;
+
 }

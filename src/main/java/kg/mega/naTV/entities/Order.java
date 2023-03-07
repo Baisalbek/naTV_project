@@ -17,17 +17,15 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String clientEmail;
+    private String clientFIO;
+    private String  clientPhone;
     @ManyToOne
     private Channels channels;
-
     @ManyToOne
     private TextAd textAd;
+    private Double totalPrice;
+    private String status;
 
-    @ManyToOne
-    private BannerAd bannerAd;
-
-    private Double orderSumm;
-    private String paymentStatus;
 
 }

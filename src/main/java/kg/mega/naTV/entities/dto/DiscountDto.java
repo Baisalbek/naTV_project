@@ -12,7 +12,5 @@ public class DiscountDto {
     private Long fromDayCount;
     private Long discount;
     @JsonIgnore
-    private Long discountDays;
-    @JsonIgnore
     private Channels channel;
 }

@@ -1,7 +1,6 @@
 package kg.mega.naTV.service.Impl;
 
 import kg.mega.naTV.entities.Price;
-import kg.mega.naTV.entities.dto.ChannelsDto;
 import kg.mega.naTV.entities.dto.PriceDto;
 import kg.mega.naTV.mappers.ChannelMapper;
 import kg.mega.naTV.mappers.PriceMapper;

@@ -1,5 +1,6 @@
 package kg.mega.naTV.entities.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kg.mega.naTV.entities.BannerAd;
 import kg.mega.naTV.entities.Channels;
 import kg.mega.naTV.entities.TextAd;
@@ -8,7 +9,11 @@ import lombok.Data;
 @Data
 public class OrderDto {
     private Long id;
+    private String clientEmail;
+    private String clientFIO;
+    private String  clientPhone;
     private Channels channels;
     private TextAd textAd;
-    private BannerAd bannerAd;
+    private Double totalPrice;
+    private String status;
 }

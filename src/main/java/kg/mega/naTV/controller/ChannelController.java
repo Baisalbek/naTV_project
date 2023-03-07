@@ -1,13 +1,14 @@
 package kg.mega.naTV.controller;
 
-import kg.mega.naTV.entities.dto.ChannelsDto;
+import kg.mega.naTV.entities.dto.ChannelDto;
+import kg.mega.naTV.entities.dto.response.ChannelCalcDto;
+import kg.mega.naTV.entities.dto.response.ChannelGetListDto;
 import kg.mega.naTV.mappers.ChannelMapper;
 import kg.mega.naTV.service.Impl.ChannelServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/CHANNEL")
 public class ChannelController {
@@ -20,9 +21,9 @@ public class ChannelController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity saveChannel(@RequestBody ChannelsDto channelsDto) {
+    public ResponseEntity saveChannel(@RequestBody ChannelDto channelDto) {
         try {
-            channelServiceImpl.registration(channelsDto);
+            channelServiceImpl.registration(channelDto);
             return ResponseEntity.ok().body("Название канала успешно сохранен!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -30,8 +31,13 @@ public class ChannelController {
     }
 
     @GetMapping("/LIST")
-    public List<ChannelsDto> channelsDtoList() {
+    public List<ChannelGetListDto> channelsDtoList() {
         return channelServiceImpl.getChannelList();
+    }
+
+    @GetMapping("/calculate")
+    public ChannelCalcDto calculatePrice(@RequestBody ChannelCalcDto  channelCalcDto){
+        return channelServiceImpl.calcDto(channelCalcDto);
     }
 
 

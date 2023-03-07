@@ -17,7 +17,6 @@ public class Discounts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long discount;
-    private Long discountDays;
     private Long fromDayCount;
 
     @ManyToOne

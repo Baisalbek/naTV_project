@@ -1,25 +1,24 @@
 package kg.mega.naTV.controller;
 
 import kg.mega.naTV.entities.OrderDate;
-import kg.mega.naTV.entities.Price;
 import kg.mega.naTV.entities.dto.OrderDateDto;
 import kg.mega.naTV.mappers.OrderDateMapper;
 import kg.mega.naTV.service.Impl.OrderDateServiceImpl;
-import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/OrderDate")
-@AllArgsConstructor
+@RestController
+@RequestMapping("/OrderDate")
 public class OrderDateController {
     private final OrderDateServiceImpl orderDateServiceImpl;
     private final OrderDateMapper orderDateMapper;
 
-    @PostMapping("/getOrderDate")
+    public OrderDateController(OrderDateServiceImpl orderDateServiceImpl, OrderDateMapper orderDateMapper) {
+        this.orderDateServiceImpl = orderDateServiceImpl;
+        this.orderDateMapper = orderDateMapper;
+    }
+
+    @PostMapping("/dates")
     public ResponseEntity getDates(OrderDateDto orderDateDto){
         try {
             orderDateServiceImpl.selectDate(orderDateDto);
