@@ -13,6 +13,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "tb_order_date")
 public class OrderDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

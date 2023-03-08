@@ -12,13 +12,13 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "tb_discount")
 public class Discounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long discount;
     private Long fromDayCount;
-
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channels channel;

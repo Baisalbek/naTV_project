@@ -6,13 +6,15 @@ import kg.mega.naTV.entities.Channels;
 import kg.mega.naTV.entities.TextAd;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class OrderDto {
     private Long id;
     private String clientEmail;
     private String clientFIO;
     private String  clientPhone;
-    private Channels channels;
+    private List<Channels> channels;
     private TextAd textAd;
     private Double totalPrice;
     private String status;

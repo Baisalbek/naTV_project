@@ -11,7 +11,7 @@ public class SaveOrderDto {
     private String clientPhone;
     private String text;
     private Double totalPrice;
-    private String status;
+    private Enum status;
     private List<ChannelForOrderDto> channels;
 
 }

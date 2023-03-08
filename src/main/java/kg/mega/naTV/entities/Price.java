@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "tb_price")
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

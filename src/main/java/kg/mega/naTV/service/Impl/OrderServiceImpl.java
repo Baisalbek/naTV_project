@@ -4,6 +4,7 @@ import kg.mega.naTV.entities.Discounts;
 import kg.mega.naTV.entities.dto.request.GetOrderDto;
 import kg.mega.naTV.entities.dto.response.ChannelForOrderDto;
 import kg.mega.naTV.entities.dto.response.SaveOrderDto;
+import kg.mega.naTV.entities.enums.OrderStatus;
 import kg.mega.naTV.mappers.OrderMapper;
 import kg.mega.naTV.repository.DiscountRepo;
 import kg.mega.naTV.repository.OrderRepo;
@@ -38,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         saveOrderDto.setClientFIO(saveOrderDto.getClientFIO());
         saveOrderDto.setClientPhone(saveOrderDto.getClientPhone());
         saveOrderDto.setText(saveOrderDto.getText());
-        saveOrderDto.setStatus("CREATED");
+        saveOrderDto.setStatus(OrderStatus.CREATED);
         for (int i = 0; i < saveOrderDto.getChannels().size(); i++) {
             ChannelForOrderDto channel = saveOrderDto.getChannels().get(i);
             channel.setChannelId(saveOrderDto.getChannels().get(i).getChannelId());
