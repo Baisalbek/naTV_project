@@ -13,3 +13,5 @@ public class ChannelForOrderDto {
     private Double price;
     private Double priceWithDiscount;
 }
+//Сделать сущьность этого ДТО
+//

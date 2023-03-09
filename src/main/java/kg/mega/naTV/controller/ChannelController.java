@@ -1,43 +1,42 @@
 package kg.mega.naTV.controller;
 
+import io.swagger.annotations.ApiOperation;
 import kg.mega.naTV.entities.dto.ChannelDto;
 import kg.mega.naTV.entities.dto.response.ChannelCalcDto;
 import kg.mega.naTV.entities.dto.response.ChannelGetListDto;
-import kg.mega.naTV.mappers.ChannelMapper;
-import kg.mega.naTV.service.Impl.ChannelServiceImpl;
+import kg.mega.naTV.service.ChannelService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/CHANNEL")
+@RequestMapping("/channel")
 public class ChannelController {
-    private final ChannelServiceImpl channelServiceImpl;
-    private final ChannelMapper channelMapper;
+    private final ChannelService channelService;
 
-    public ChannelController(ChannelServiceImpl channelServiceImpl, ChannelMapper channelMapper) {
-        this.channelServiceImpl = channelServiceImpl;
-        this.channelMapper = channelMapper;
-    }
-
+    @ApiOperation("Сохранение канала.")
     @PostMapping("/save")
-    public ResponseEntity saveChannel(@RequestBody ChannelDto channelDto) {
+    public ResponseEntity<?> saveChannel(@RequestBody ChannelDto channelDto) {
         try {
-            channelServiceImpl.registration(channelDto);
+            channelService.registration(channelDto);
             return ResponseEntity.ok().body("Название канала успешно сохранен!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-    @GetMapping("/LIST")
+    @ApiOperation("Получение списка каналов.")
+    @GetMapping("/list")
     public List<ChannelGetListDto> channelsDtoList() {
-        return channelServiceImpl.getChannelList();
+        return channelService.getChannelList();
     }
 
+    @ApiOperation("Получение стоимости рекламы на одном канале.")
     @GetMapping("/calculate")
-    public ChannelCalcDto calculatePrice(@RequestBody ChannelCalcDto  channelCalcDto){
-        return channelServiceImpl.calcDto(channelCalcDto);
+    public ChannelCalcDto calculatePrice(@RequestBody ChannelCalcDto channelCalcDto) {
+        return channelService.calcDto(channelCalcDto);
     }
 
 

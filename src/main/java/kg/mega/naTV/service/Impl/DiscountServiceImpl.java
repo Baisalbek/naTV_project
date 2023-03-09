@@ -6,20 +6,15 @@ import kg.mega.naTV.mappers.DiscountMapper;
 import kg.mega.naTV.repository.ChannelRepo;
 import kg.mega.naTV.repository.DiscountRepo;
 import kg.mega.naTV.service.DiscountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+@RequiredArgsConstructor
 @Service
 public class DiscountServiceImpl implements DiscountService {
     private final DiscountRepo discountRepo;
     private final ChannelRepo channelRepo;
     private final DiscountMapper discountMapper;
-
-    public DiscountServiceImpl(DiscountRepo discountRepo, ChannelRepo channelRepo, DiscountMapper discountMapper) {
-        this.discountRepo = discountRepo;
-        this.channelRepo = channelRepo;
-        this.discountMapper = discountMapper;
-    }
 
     public ResponseEntity<?> setDiscount(DiscountDto discountDto) {
         discountDto.setChannel(channelRepo.findById(discountDto.getChannel().getId()).get());

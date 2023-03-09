@@ -12,11 +12,12 @@ import kg.mega.naTV.repository.ChannelRepo;
 import kg.mega.naTV.repository.DiscountRepo;
 import kg.mega.naTV.repository.PriceRepo;
 import kg.mega.naTV.service.ChannelService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ChannelServiceImpl implements ChannelService {
     private final ChannelRepo channelRepo;
@@ -25,13 +26,6 @@ public class ChannelServiceImpl implements ChannelService {
     private final DiscountRepo discountRepo;
     private final DiscountMapper discountMapper;
 
-    public ChannelServiceImpl(ChannelRepo channelRepo, ChannelMapper channelMapper, PriceRepo priceRepo, DiscountRepo discountRepo, DiscountMapper discountMapper) {
-        this.channelRepo = channelRepo;
-        this.channelMapper = channelMapper;
-        this.priceRepo = priceRepo;
-        this.discountRepo = discountRepo;
-        this.discountMapper = discountMapper;
-    }
 
     public Channels registration(ChannelDto channelDto) throws Exception {
         if (channelRepo.findByChannelName(channelDto.getChannelName()) != null) {
@@ -54,22 +48,20 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     public ChannelCalcDto calcDto(ChannelCalcDto channelCalcDto) {
-        Long disc = 0l;
-        channelCalcDto.setText(channelCalcDto.getText());
-        channelCalcDto.setDaysCount(channelCalcDto.getDaysCount());
-        channelCalcDto.setChannelId(channelCalcDto.getChannelId());
-        Double totalPrice = priceRepo.findByChannelsId(channelCalcDto.getChannelId()).getPricePerLetter() * inputText(channelCalcDto.getText()) * channelCalcDto.getDaysCount();
+        Long disc = 0L;
+        double totalPrice = priceRepo.findByChannelsId(channelCalcDto.getChannelId()).getPricePerLetter() * inputText(channelCalcDto.getText()) * channelCalcDto.getDaysCount();
         channelCalcDto.setPrice(totalPrice);
         List<Discounts> discountsList = discountRepo.findAllByChannelId(channelCalcDto.getChannelId());
-        if (discountsList == null) {
+        if (discountsList.size() == 0) {
             channelCalcDto.setPriceWithDiscount(totalPrice);
         } else {
-            for (int i = 0; i < discountsList.size(); i++) {
-                if (channelCalcDto.getDaysCount() >= discountsList.get(i).getFromDayCount()) {
-                    disc = discountsList.get(i).getDiscount();
+            for (Discounts discounts : discountsList) {
+                if (channelCalcDto.getDaysCount() >= discounts.getFromDayCount()) {
+                    disc = discounts.getDiscount();
                 }
             }
-            channelCalcDto.setPriceWithDiscount(totalPrice - ((double) disc * 100) / totalPrice);
+            double totalPriceWIthDiscount = Math.round(totalPrice - ((double) disc * 100) / totalPrice);
+            channelCalcDto.setPriceWithDiscount(totalPriceWIthDiscount);
         }
         return channelCalcDto;
     }

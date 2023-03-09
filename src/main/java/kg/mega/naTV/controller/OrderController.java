@@ -1,31 +1,27 @@
 package kg.mega.naTV.controller;
 
-import kg.mega.naTV.entities.dto.OrderDto;
+import io.swagger.annotations.ApiOperation;
 import kg.mega.naTV.entities.dto.request.GetOrderDto;
 import kg.mega.naTV.entities.dto.response.SaveOrderDto;
-import kg.mega.naTV.mappers.OrderMapper;
-import kg.mega.naTV.service.Impl.OrderServiceImpl;
+import kg.mega.naTV.service.OrderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/Order")
+@RequestMapping("/order")
 public class OrderController {
-    private final OrderServiceImpl orderServiceImpl;
-    private final OrderMapper orderMapper;
+    private final OrderService orderService;
 
-    public OrderController(OrderServiceImpl orderServiceImpl, OrderMapper orderMapper) {
-        this.orderServiceImpl = orderServiceImpl;
+//    @ApiOperation("///.")
+//    @PostMapping("/save")
+//    public GetOrderDto getOrder(@RequestBody GetOrderDto getOrderDto) {
+//        return orderService.saveOrder(getOrderDto);
+//    }
 
-        this.orderMapper = orderMapper;
-    }
-
-    @PostMapping("/save")
-    public GetOrderDto getOrder(@RequestBody GetOrderDto getOrderDto){
-        return orderServiceImpl.saveOrder(getOrderDto);
-    }
+    @ApiOperation("Сохранение заказа.")
     @GetMapping("/saveOrder")
-    public SaveOrderDto saveOrder(@RequestBody SaveOrderDto saveOrderDto){
-       return orderServiceImpl.createOrder(saveOrderDto);
+    public SaveOrderDto saveOrder(@RequestBody SaveOrderDto saveOrderDto) {
+        return orderService.createOrder(saveOrderDto);
     }
-
 }
