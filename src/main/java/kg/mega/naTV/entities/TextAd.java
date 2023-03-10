@@ -19,5 +19,4 @@ public class TextAd {
     private Long id;
     private String text;
     private Long countOfSymbols;
-
 }

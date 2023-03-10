@@ -20,7 +20,7 @@ public class OrderController {
 //    }
 
     @ApiOperation("Сохранение заказа.")
-    @GetMapping("/saveOrder")
+    @PostMapping("/saveOrder")
     public SaveOrderDto saveOrder(@RequestBody SaveOrderDto saveOrderDto) {
         return orderService.createOrder(saveOrderDto);
     }

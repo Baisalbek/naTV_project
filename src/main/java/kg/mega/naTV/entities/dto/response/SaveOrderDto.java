@@ -1,5 +1,6 @@
 package kg.mega.naTV.entities.dto.response;
 
+import kg.mega.naTV.entities.enums.OrderStatus;
 import lombok.Data;
 import java.util.List;
 @Data
@@ -9,6 +10,6 @@ public class SaveOrderDto {
     private String clientPhone;
     private String text;
     private Double totalPrice;
-    private Enum status;
+    private OrderStatus status;
     private List<ChannelForOrderDto> channels;
 }

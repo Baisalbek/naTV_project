@@ -2,9 +2,11 @@ package kg.mega.naTV.mappers;
 
 import kg.mega.naTV.entities.Channels;
 import kg.mega.naTV.entities.dto.ChannelDto;
+import kg.mega.naTV.entities.dto.response.ChannelForOrderDto;
 import kg.mega.naTV.entities.dto.response.ChannelGetListDto;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -15,5 +17,8 @@ public interface ChannelMapper {
 
     public List<ChannelGetListDto> ListToDto(List<Channels> channelList);
     public List<Channels> ListToEntity(List<ChannelGetListDto> channelDtoList);
+    @Mapping(source = "channelId", target = "id")
+    public Channels channelToEntity(ChannelForOrderDto channelForOrderDto);
+
 
 }

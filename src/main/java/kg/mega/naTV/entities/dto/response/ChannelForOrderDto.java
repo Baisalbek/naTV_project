@@ -1,6 +1,7 @@
 package kg.mega.naTV.entities.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import kg.mega.naTV.entities.OrderDate;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,5 +14,5 @@ public class ChannelForOrderDto {
     private Double price;
     private Double priceWithDiscount;
 }
-//Сделать сущьность этого ДТО
+//Сделать сущность этого ДТО
 //

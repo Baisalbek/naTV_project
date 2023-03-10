@@ -1,9 +1,8 @@
 package kg.mega.naTV.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import kg.mega.naTV.entities.dto.TextAdDto;
+import kg.mega.naTV.entities.enums.OrderStatus;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
+@ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "tb_order")
@@ -21,10 +21,11 @@ public class Order {
     private String clientEmail;
     private String clientFIO;
     private String  clientPhone;
-    @OneToMany
+    @ManyToMany
     private List<Channels> channels;
     @ManyToOne
     private TextAd textAd;
     private Double totalPrice;
-    private String status;
+    @Enumerated(value = EnumType.ORDINAL)
+    private OrderStatus status;
 }

@@ -37,19 +37,20 @@ public class ChannelServiceImpl implements ChannelService {
     public List<ChannelGetListDto> getChannelList() {
         List<Channels> channelsList = channelRepo.findAll();
         List<ChannelGetListDto> channelGetListDtoList = channelMapper.ListToDto(channelsList);
-        for (int i = 0; i < channelGetListDtoList.size(); i++) {
-            channelGetListDtoList.get(i).setPricePerLetter(priceRepo.findById(channelGetListDtoList.get(i)
+        for (ChannelGetListDto channelGetListDto : channelGetListDtoList) {
+            channelGetListDto.setPricePerLetter(priceRepo.findById(channelGetListDto
                     .getId()).get().getPricePerLetter());
             List<Discounts> discountsList = discountRepo.findAll();
             List<DiscountDto> discountDtoList = discountMapper.ListToDto(discountsList);
-            channelGetListDtoList.get(i).setDiscounts(discountMapper.ListToDto(discountRepo.findAllByChannelId(channelGetListDtoList.get(i).getId())));
+            channelGetListDto.setDiscounts(discountMapper.ListToDto(discountRepo.findAllByChannelId(channelGetListDto.getId())));
         }
         return channelGetListDtoList;
     }
 
     public ChannelCalcDto calcDto(ChannelCalcDto channelCalcDto) {
         Long disc = 0L;
-        double totalPrice = priceRepo.findByChannelsId(channelCalcDto.getChannelId()).getPricePerLetter() * inputText(channelCalcDto.getText()) * channelCalcDto.getDaysCount();
+        double pricePerLetter = priceRepo.findByChannelsId(channelCalcDto.getChannelId()).getPricePerLetter();
+        double totalPrice = pricePerLetter * inputText(channelCalcDto.getText()) * channelCalcDto.getDaysCount();
         channelCalcDto.setPrice(totalPrice);
         List<Discounts> discountsList = discountRepo.findAllByChannelId(channelCalcDto.getChannelId());
         if (discountsList.size() == 0) {
@@ -67,7 +68,7 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     public Long inputText(String text) {
-        Long spaces = text.chars().filter(c -> c == ' ').count();
+        long spaces = text.chars().filter(c -> c == ' ').count();
         Long countOfSymbols = text.length() - spaces;
         return countOfSymbols;
     }

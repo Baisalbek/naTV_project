@@ -20,7 +20,7 @@ public class TextAdServiceImpl implements TextAdService {
 
     public ResponseEntity<?> inputText(TextAdDto textAdDto) {
         TextAd textAd = textAdMapper.toEntity(textAdDto);
-        Long spaces = textAd.getText().chars().filter(c -> c == ' ').count();
+        long spaces = textAd.getText().chars().filter(c -> c == ' ').count();
         textAd.setCountOfSymbols(textAd.getText().length() - spaces);
         return ResponseEntity.ok(textAdRepo.save(textAd));
     }
