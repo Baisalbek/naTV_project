@@ -10,9 +10,11 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
     public OrderDto toDto(Order order);
+
     public Order toEntity(SaveOrderDto orderDto);
 
     public List<OrderDto> ListToDto(List<Order> orderList);
+
     public List<Order> ListToEntity(List<OrderDto> orderDtoList);
 
 }

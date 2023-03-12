@@ -5,19 +5,18 @@ import kg.mega.naTV.entities.dto.TextAdDto;
 import kg.mega.naTV.mappers.TextAdMapper;
 import kg.mega.naTV.repository.TextAdRepo;
 import kg.mega.naTV.service.TextAdService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+@RequiredArgsConstructor
 
 @Service
 public class TextAdServiceImpl implements TextAdService {
     private final TextAdRepo textAdRepo;
     private final TextAdMapper textAdMapper;
 
-    public TextAdServiceImpl(TextAdRepo textAdRepo, TextAdMapper textAdMapper) {
-        this.textAdRepo = textAdRepo;
-        this.textAdMapper = textAdMapper;
-    }
-
+    @Override
     public ResponseEntity<?> inputText(TextAdDto textAdDto) {
         TextAd textAd = textAdMapper.toEntity(textAdDto);
         long spaces = textAd.getText().chars().filter(c -> c == ' ').count();

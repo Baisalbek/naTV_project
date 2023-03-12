@@ -14,19 +14,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class PriceServiceImpl implements PriceService {
-    private final PriceMapper priceMapper;
     private final PriceRepo priceRepo;
     private final ChannelRepo channelRepo;
+    private final PriceMapper priceMapper;
+    private final ChannelMapper channelMapper;
 
-
+    // Метод для установки цены
+    @Override
     public ResponseEntity<?> setPrice(PriceDto priceDto) {
-        priceDto.setChannels(channelRepo.findById(priceDto.getChannels().getId()).get());
+        priceDto.setChannels(channelMapper.EntityTtoDto(channelRepo.findById(priceDto.getChannels().getId()).get()));
         Price price = priceMapper.toEntity(priceDto);
         return ResponseEntity.ok(priceRepo.save(price));
     }
 
+    // Метод для установки цены
     @Override
     public Price getPrice(Long id) {
-        return priceRepo.findById(id).get();
+        return priceRepo.findByChannelsId(id);
     }
+
 }

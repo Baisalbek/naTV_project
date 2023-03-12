@@ -11,9 +11,9 @@ public class OrderDto {
     private Long id;
     private String clientEmail;
     private String clientFIO;
-    private String  clientPhone;
+    private String clientPhone;
     private List<ChannelDto> channels;
-    private TextAd textAd;
+    private TextAdDto textAd;
     private Double totalPrice;
     private OrderStatus status;
 }

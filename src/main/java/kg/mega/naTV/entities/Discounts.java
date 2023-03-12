@@ -1,9 +1,6 @@
 package kg.mega.naTV.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,8 +8,8 @@ import javax.persistence.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "tb_discount")
+@NoArgsConstructor
+@Table(name = "discount")
 public class Discounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +17,5 @@ public class Discounts {
     private Long discount;
     private Long fromDayCount;
     @ManyToOne
-    @JoinColumn(name = "channel_id")
     private Channels channel;
-
 }

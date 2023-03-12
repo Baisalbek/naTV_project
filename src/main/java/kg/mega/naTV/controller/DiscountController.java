@@ -8,9 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/Discounts")
+@RequestMapping("/api/v1/discounts")
 public class DiscountController {
     private final DiscountService discountService;
 
@@ -25,9 +27,9 @@ public class DiscountController {
         }
     }
 
-    @ApiOperation("Получение скидки по id.")
+    @ApiOperation("Получение скидки по id канала.")
     @GetMapping("/get")
-    public Discounts getDiscount(@RequestParam Long id) {
+    public List<Discounts> getDiscount(@RequestParam Long id) {
         return discountService.getDiscount(id);
     }
 }

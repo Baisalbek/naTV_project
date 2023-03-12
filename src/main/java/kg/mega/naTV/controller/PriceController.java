@@ -3,21 +3,19 @@ package kg.mega.naTV.controller;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.naTV.entities.Price;
 import kg.mega.naTV.entities.dto.PriceDto;
-import kg.mega.naTV.service.Impl.PriceServiceImpl;
 import kg.mega.naTV.service.PriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/price")
+@RequestMapping("/api/v1/price")
 public class PriceController {
-    private  final PriceService priceService;
+    private final PriceService priceService;
+
     @ApiOperation("Установка цены на каналы.")
-    @PostMapping("/set")
+    @PostMapping("/set-price")
     public ResponseEntity setPrice(@RequestBody PriceDto priceDto) {
         try {
             priceService.setPrice(priceDto);
@@ -26,10 +24,10 @@ public class PriceController {
             return ResponseEntity.badRequest().body("Цена не установлена");
         }
     }
-    @ApiOperation("Получение цен по id.")
-    @GetMapping("/get")
-    public Price getPrice(@RequestParam Long id){
-      return priceService.getPrice(id);
 
+    @ApiOperation("Получение цен по id канала.")
+    @GetMapping("/get-price")
+    public Price getPrice(@RequestParam Long id) {
+        return priceService.getPrice(id);
     }
 }

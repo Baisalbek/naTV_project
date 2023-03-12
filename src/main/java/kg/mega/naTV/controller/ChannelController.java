@@ -8,25 +8,27 @@ import kg.mega.naTV.service.ChannelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/channel")
+@RequestMapping("/api/v1/channels")
 public class ChannelController {
     private final ChannelService channelService;
 
     @ApiOperation("Сохранение канала.")
     @PostMapping("/save")
-    public ResponseEntity<?> saveChannel(@RequestBody ChannelDto channelDto) {
+    public ResponseEntity<?> saveChannel(@ModelAttribute ChannelDto channelDto, @RequestPart(required = false) MultipartFile file) {
         try {
-            channelService.registration(channelDto);
+            channelService.registration(channelDto, file);
             return ResponseEntity.ok().body("Название канала успешно сохранен!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
     @ApiOperation("Получение списка каналов.")
     @GetMapping("/list")
     public List<ChannelGetListDto> channelsDtoList() {
@@ -38,6 +40,4 @@ public class ChannelController {
     public ChannelCalcDto calculatePrice(@RequestBody ChannelCalcDto channelCalcDto) {
         return channelService.calcDto(channelCalcDto);
     }
-
-
 }
