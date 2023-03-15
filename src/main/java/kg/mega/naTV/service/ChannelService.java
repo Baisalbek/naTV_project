@@ -10,8 +10,6 @@ import java.util.List;
 
 public interface ChannelService {
     Channels registration(ChannelDto channelDto, MultipartFile logo) throws Exception;
-
     List<ChannelGetListDto> getChannelList();
-
     ChannelCalcDto calcDto(ChannelCalcDto channelCalcDto);
 }

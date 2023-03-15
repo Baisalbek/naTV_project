@@ -1,6 +1,5 @@
 package kg.mega.naTV.entities.dto.response;
 
-import kg.mega.naTV.entities.dto.response.ChannelForOrderDto;
 import kg.mega.naTV.entities.enums.OrderStatus;
 import lombok.Data;
 
@@ -14,5 +13,5 @@ public class SaveOrderDto {     //DTO для получение информац
     private String text;
     private Double totalPrice;
     private OrderStatus status;
-    private List<ChannelForOrderDto> channels;
+    private List<OrderedChannelsDto> channels;
 }

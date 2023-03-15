@@ -8,5 +8,4 @@ public interface PriceService {
     ResponseEntity<?> setPrice(PriceDto priceDto);
 
     Price getPrice(Long id);
-
 }

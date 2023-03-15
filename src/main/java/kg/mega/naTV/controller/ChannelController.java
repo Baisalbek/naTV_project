@@ -20,7 +20,7 @@ public class ChannelController {
 
     @ApiOperation("Сохранение канала.")
     @PostMapping("/save")
-    public ResponseEntity<?> saveChannel(@ModelAttribute ChannelDto channelDto, @RequestPart(required = false) MultipartFile file) {
+    public ResponseEntity<?> saveChannel(@ModelAttribute ChannelDto channelDto,@RequestPart(required = false) MultipartFile file) {
         try {
             channelService.registration(channelDto, file);
             return ResponseEntity.ok().body("Название канала успешно сохранен!");

@@ -1,11 +1,11 @@
 package kg.mega.naTV.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Setter
@@ -13,13 +13,12 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "channel_for_order")
-public class ChannelForOrder {
+@Table(name = "tb_ordered_days")
+public class OrderedDays {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long channelId;
-    @OneToMany
-    private List<OrderedDates> days;
-    private Double price;
-    private Double priceWithDiscount;
+    @JsonIgnore
+    private Long id;
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    private Date day;
 }

@@ -7,5 +7,4 @@ public class TextAdDto {
     private Long id;
     private String text;
     private Long countOfSymbols;
-
 }

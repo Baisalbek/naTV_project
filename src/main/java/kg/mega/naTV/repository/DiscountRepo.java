@@ -11,5 +11,4 @@ import java.util.List;
 public interface DiscountRepo extends JpaRepository<Discounts, Long> {
     @Query(value = "select * from tb_discount where channel_id = :id order by from_day_count", nativeQuery = true)
     List<Discounts> findAllByChannelId(Long id);
-
 }

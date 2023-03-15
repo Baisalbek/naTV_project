@@ -1,6 +1,9 @@
 package kg.mega.naTV.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "text_ad")
+@Table(name = "tb_text_ad")
 public class TextAd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

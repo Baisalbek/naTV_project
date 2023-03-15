@@ -1,6 +1,5 @@
 package kg.mega.naTV.entities.dto;
 
-import kg.mega.naTV.entities.Channels;
 import lombok.Data;
 
 @Data

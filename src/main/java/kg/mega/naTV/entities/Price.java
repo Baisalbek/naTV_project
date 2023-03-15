@@ -1,6 +1,9 @@
 package kg.mega.naTV.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -8,14 +11,15 @@ import javax.persistence.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "price")
+@RequiredArgsConstructor
+@Table(name = "tb_price")
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double pricePerLetter;
-    @ManyToOne
-    @JoinColumn(name = "channel_id")
+    @OneToOne
     private Channels channels;
+
+
 }

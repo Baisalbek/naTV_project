@@ -1,17 +1,17 @@
 package kg.mega.naTV.service.Impl;
 
 import kg.mega.naTV.entities.*;
-import kg.mega.naTV.entities.dto.response.ChannelForOrderDto;
+import kg.mega.naTV.entities.dto.response.OrderedChannelsDto;
 import kg.mega.naTV.entities.dto.response.SaveOrderDto;
 import kg.mega.naTV.entities.enums.OrderStatus;
 import kg.mega.naTV.mappers.ChannelMapper;
+import kg.mega.naTV.mappers.OrderedChannelsMapper;
 import kg.mega.naTV.repository.*;
 import kg.mega.naTV.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,7 +21,12 @@ public class OrderServiceImpl implements OrderService {
     private final PriceRepo priceRepo;
     private final DiscountRepo discountRepo;
     private final TextAdRepo textAdRepo;
+    private final OrderedDaysRepo orderedDaysRepo;
+    private final OrderedChannelsRepo orderedChannelsRepo;
+
     private final ChannelMapper channelMapper;
+    private final OrderedChannelsMapper orderedChannelsMapper;
+
 
     // Метод для получения расчета и информации по заказу и сохранения ее в БД
     @Override
@@ -30,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
         long countOfSymbols = 0L;
         double priceWithDiscount = 0d;
         for (int i = 0; i < saveOrderDto.getChannels().size(); i++) {
-            ChannelForOrderDto channel = saveOrderDto.getChannels().get(i);
+            OrderedChannelsDto channel = saveOrderDto.getChannels().get(i);
             long spaces = saveOrderDto.getText().chars().filter(c -> c == ' ').count();
             countOfSymbols = saveOrderDto.getText().length() - spaces;
             Price price = priceRepo.findByChannelsId(channel.getChannelId());
@@ -47,6 +52,9 @@ public class OrderServiceImpl implements OrderService {
                     }
                 }
                 priceWithDiscount = priceWithDiscount(priceWithoutDiscount, percent);
+                if (priceWithDiscount == 0) {
+                    channel.setPriceWithDiscount(priceWithDiscount);
+                }
                 channel.setPriceWithDiscount(priceWithDiscount);
             }
             sumPrice += Math.round(channel.getPriceWithDiscount());
@@ -86,19 +94,22 @@ public class OrderServiceImpl implements OrderService {
         order.setClientPhone(saveOrderDto.getClientPhone());
         order.setStatus(OrderStatus.CREATED);
         order.setTextAd(textAd);
-        List<Channels> channels = new ArrayList<>();
-        for (int i = 0; i < saveOrderDto.getChannels().size(); i++) {
-            channels.add(channelMapper.channelToEntity(saveOrderDto.getChannels().get(i)));
-        }
-        order.setChannels(channels);
+        List<OrderedChannels> orderedChannels = new ArrayList<>();
+        List<OrderedDays> daysList = new ArrayList<>();
         order.setTotalPrice(sumPrice);
-        orderRepo.save(order);
+        order = orderRepo.save(order);
+        for (int i = 0; i < saveOrderDto.getChannels().size(); i++) {
+            orderedChannels.add(orderedChannelsMapper.toEntity(saveOrderDto.getChannels().get(i)));
+            orderedChannels.get(i).setOrderId(order.getId());
+            daysList.add(orderedChannels.get(i).getDays().get(i));
+        }
+        orderedChannelsRepo.saveAll(orderedChannels);
+        orderedDaysRepo.saveAll(daysList);
         return order;
     }
 
-
     @Override
-    public Order getOrder(String clientPhone) {
+    public List<Order> getOrder(String clientPhone) {
         return orderRepo.findAllByClientPhone(clientPhone);
     }
 }

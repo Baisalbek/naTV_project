@@ -30,6 +30,7 @@ public class ChannelServiceImpl implements ChannelService {
     private final DiscountRepo discountRepo;
     private final DiscountMapper discountMapper;
 
+    // Метод для сохранения канала.
     @Override
     public Channels registration(ChannelDto channelDto, MultipartFile file) throws Exception {
         if (channelRepo.findByChannelName(channelDto.getChannelName()) != null) {
@@ -40,6 +41,7 @@ public class ChannelServiceImpl implements ChannelService {
         return channelRepo.save(channelMapper.DtoToEntity(channelDto));
     }
 
+    // Метод для сохранения ссылки лого.
     private String saveLogo(MultipartFile file) throws IOException {
         File logo = new File("C:\\Users\\Bektashev's\\Documents\\logos\\" + file.getOriginalFilename());
         logo.createNewFile();
@@ -49,6 +51,7 @@ public class ChannelServiceImpl implements ChannelService {
         return logo.getAbsolutePath();
     }
 
+    // Метод для получения листа каналов.
     @Override
     public List<ChannelGetListDto> getChannelList() {
         List<Channels> channelsList = channelRepo.findAll();
@@ -63,6 +66,7 @@ public class ChannelServiceImpl implements ChannelService {
         return channelGetListDtoList;
     }
 
+    // Метод для получения расчета цен по рекламе.
     @Override
     public ChannelCalcDto calcDto(ChannelCalcDto channelCalcDto) {
         Long disc = 0L;
@@ -84,10 +88,10 @@ public class ChannelServiceImpl implements ChannelService {
         return channelCalcDto;
     }
 
+    // Метод для получения количества символов в тексте без пробелов.
     public Long inputText(String text) {
         long spaces = text.chars().filter(c -> c == ' ').count();
         Long countOfSymbols = text.length() - spaces;
         return countOfSymbols;
     }
-
 }

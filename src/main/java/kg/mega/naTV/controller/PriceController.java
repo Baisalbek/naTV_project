@@ -15,7 +15,7 @@ public class PriceController {
     private final PriceService priceService;
 
     @ApiOperation("Установка цены на каналы.")
-    @PostMapping("/set-price")
+    @PostMapping("/set")
     public ResponseEntity setPrice(@RequestBody PriceDto priceDto) {
         try {
             priceService.setPrice(priceDto);
@@ -25,8 +25,8 @@ public class PriceController {
         }
     }
 
-    @ApiOperation("Получение цен по id канала.")
-    @GetMapping("/get-price")
+    @ApiOperation("Получение цен по id.")
+    @GetMapping("/get")
     public Price getPrice(@RequestParam Long id) {
         return priceService.getPrice(id);
     }

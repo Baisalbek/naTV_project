@@ -8,12 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface PriceMapper {
-    public PriceDto toDto(Price price);
+    PriceDto toDto(Price price);
 
-    public Price toEntity(PriceDto priceDto);
+    Price toEntity(PriceDto priceDto);
 
-    public List<PriceDto> ListToDto(List<Price> priceList);
+    List<PriceDto> ListToDto(List<Price> priceList);
 
-    public List<Price> ListToEntity(List<PriceDto> priceDtoList);
-
+    List<Price> ListToEntity(List<PriceDto> priceDtoList);
 }

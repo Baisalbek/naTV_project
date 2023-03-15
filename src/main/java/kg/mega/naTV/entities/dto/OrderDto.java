@@ -1,6 +1,6 @@
 package kg.mega.naTV.entities.dto;
 
-import kg.mega.naTV.entities.TextAd;
+import kg.mega.naTV.entities.dto.response.OrderedChannelsDto;
 import kg.mega.naTV.entities.enums.OrderStatus;
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class OrderDto {
     private String clientEmail;
     private String clientFIO;
     private String clientPhone;
-    private List<ChannelDto> channels;
+    private List<OrderedChannelsDto> channels;
     private TextAdDto textAd;
     private Double totalPrice;
     private OrderStatus status;

@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "order")
+@Table(name = "tb_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class Order {
     private String clientFIO;
     private String clientPhone;
     @OneToMany
-    private List<Channels> channels;
-    @OneToOne
+    private List<OrderedChannels> channels;
+    @ManyToOne
     private TextAd textAd;
     private Double totalPrice;
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
 }
